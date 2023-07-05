@@ -20,8 +20,9 @@ for (x, y, w, h) in faces:
 	face = face[y: y+h, x: x+w]
 	to_put_mask.append(face)
 
-for face in to_put_mask:
+	
 
+def faceMesh(input_face):
 	mp_holistic = mp.solutions.holistic
 
 	holistic_model = mp_holistic.Holistic(
@@ -31,13 +32,13 @@ for face in to_put_mask:
 
 	mp_drawing = mp.solutions.drawing_utils
 
-	rgb_face = cv2.cvtColor(face, cv2.COLOR_BGR2RGB)
+	rgb_face = cv2.cvtColor(input_face, cv2.COLOR_BGR2RGB)
 
 	rgb_face.flags.writeable = False
 	results = holistic_model.process(rgb_face)
 	rgb_face.flags.writeable = True
 
-	mp_drawing.draw_landmarks(
+	mp_drawing.draw_landmarks(\
 		rgb_face,
 		results.face_landmarks,
 		mp_holistic.FACEMESH_CONTOURS,
@@ -52,9 +53,13 @@ for face in to_put_mask:
 			circle_radius = 1
 		)
 	)
+	return rgb_face
 
-cv2.imshow("face", rgb_face)
+for face in to_put_mask:
+	output = faceMesh(face)
 
-cv2.imwrite("output.jpg", rgb_face)
+cv2.imshow("face", output)
+
+cv2.imwrite("output.jpg", output)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
