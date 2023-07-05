@@ -54,5 +54,7 @@ for face in to_put_mask:
 	)
 
 cv2.imshow("face", rgb_face)
+
+cv2.imwrite("output.jpg", rgb_face)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
