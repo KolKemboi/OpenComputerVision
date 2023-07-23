@@ -5,6 +5,9 @@ import os
 image_path = os.path.join("assets","image_1.png")
 image = cv2.imread(image_path, cv2.IMREAD_UNCHANGED)
 
+
+
+
 edges = cv2.Canny(image, 50, 150)
 cv2.imshow("image", edges)
 
