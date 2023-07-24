@@ -1,3 +1,5 @@
+
+
 import cv2
 
 path = "img.jpg"
